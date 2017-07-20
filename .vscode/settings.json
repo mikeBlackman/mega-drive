@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "vdp_bg.h": "c",
+        "vdp.h": "c",
+        "types.h": "c",
+        "genesis.h": "c",
+        "bmp.h": "c",
+        "sprite_eng.h": "c",
+        "vdp_tile.h": "c",
+        "maths.h": "c",
+        "debug_tool.c": "cpp",
+        "string.c": "cpp",
+        "vdp_pal.h": "c",
+        "resources.h": "c",
+        "debug_tool.h": "c"
+    }
+}
