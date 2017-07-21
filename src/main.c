@@ -3,16 +3,19 @@
 #include "resources.h"
 
 #define MODE_SEGA_LOGO_BOOT 0
+#define MODE_MD_LOGO_DISPLAY 1
 
 void animateSegaLogo(s16 left, s16 right, s16 *hscroll);
 void setUpSegaLogoToAnimate(u32 sega_logo_width, u32 sega_logo_height);
 
 u8 game_mode;
 
+u16 sega_logo_screen_offset = 112;
+
 int main() {
+  // Init first scene
   game_mode = MODE_SEGA_LOGO_BOOT;
   setUpSegaLogoToAnimate(segalogo.w, segalogo.h);
-  u16 sega_logo_screen_offset = 112;
   s16 leftScrollPos = 0 - (sega_logo_screen_offset + segalogo.w);
   s16 rightScrollPos = sega_logo_screen_offset + segalogo.w;
   s16 hscroll[VDP_getScreenHeight()];
@@ -28,8 +31,25 @@ int main() {
         leftScrollPos += 2;
         rightScrollPos -= 2;
         animateSegaLogo(leftScrollPos, rightScrollPos, hscroll);
+      } else {
+        // Animation Finished - Cleaup Display
+        waitTick(TICKPERSECOND);
+        VDP_fadeOutAll(20, 0);
+        waitTick(TICKPERSECOND);
+        VDP_clearPlan(PLAN_B,1);
+        VDP_waitDMACompletion();
+
       }
     }
+    else if (game_mode == MODE_MD_LOGO_DISPLAY){
+
+
+
+
+    }
+
+
+
     VDP_waitVSync();
   }
   return (0);
